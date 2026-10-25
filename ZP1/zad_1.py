@@ -4,8 +4,12 @@ class Student:
         self._marks = marks
 
     @property
-    def name(self) -> None:
+    def name(self) -> str:
         return self._name
+
+    @marks.setter
+    def marks(self, marks: int) -> None:
+        self._marks = marks
 
     def is_passed(self) -> None:
 
@@ -13,6 +17,6 @@ class Student:
 
 
 student1 = Student('Ala', 87)
-student2 = Student('Franek',7)
+student2 = Student('Franek', 7)
 
 print(student1.is_passed(), student2.is_passed())
