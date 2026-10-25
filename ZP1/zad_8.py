@@ -2,18 +2,19 @@ import requests
 import argparse
 
 BREWERY_API = 'https://api.openbrewerydb.org/v1/breweries'
+
+
 class Brewery:
 
-
-
-    def __init__(self , id, name, type, a1, a2, a3, city, state_province, postal, country,
-                 longtitude,latitude, phone, url, state, street):
-        self.id:str = id
-        self.name:str = name
-        self.brewery_type:str = type
-        self.address_1:str = a1
-        self.address_2 : str =a2
-        self.address_3 : str = a3
+    def __init__(self, id, name, type, a1, a2, a3,
+                 city, state_province, postal, country,
+                 longtitude, latitude, phone, url, state, street):
+        self.id: str = id
+        self.name: str = name
+        self.brewery_type: str = type
+        self.address_1: str = a1
+        self.address_2: str = a2
+        self.address_3: str = a3
         self.city: str = city
         self.state_province: str = state_province
         self.postal_code: str = postal
@@ -23,40 +24,62 @@ class Brewery:
         self.phone: str = phone
         self.website_url: str = url
         self.state: str = state
-        self.street:str = street
+        self.street: str = street
         pass
 
     def __str__(self):
-        return f'Brewery: {self.name}, Type: {self.brewery_type}, Address 1: {self.address_1}, Address 2: {self.address_2}, Address 3: {self.address_3}, City: {self.city}, State/Province: {self.state_province}, Postal Code: {self.postal_code}, Country: {self.country}, Longitude: {self.longtitude}, Latitude: {self.latitude}, Phone: {self.phone}, Website URL: {self.website_url}, State: {self.state}, Street: {self.street}'
+        return f'''Brewery: {self.name}
+        Type: {self.brewery_type}
+        Address 1: {self.address_1}
+        Address 2: {self.address_2}
+        Address 3: {self.address_3}
+        City: {self.city}
+        State/Province: {self.state_province}
+        Postal Code: {self.postal_code}
+        Country: {self.country}
+        Longitude: {self.longtitude}
+        Latitude: {self.latitude}
+        Phone: {self.phone}
+        Website URL: {self.website_url}
+        State: {self.state}
+        Street: {self.street}'''
 
-def listbreweries(city = None)-> list:
-    #try:
-        if city:
 
-            resp = requests.get(BREWERY_API + f'?by_city={city.replace(" ", "%20")}&per_page=20')
-        else:
-            resp = requests.get(BREWERY_API + '?per_page=20')
-        brew_list = []
-        if resp.status_code == 200:
-            resp_json = resp.json()
+def listbreweries(city=None) -> list:
+    if city:
+        city = city.replace(' ', '%20')
+        resp = requests.get(BREWERY_API + f'?by_city={city}&per_page=20')
+    else:
+        resp = requests.get(BREWERY_API + '?per_page=20')
+    brew_list = []
+    if resp.status_code == 200:
+        resp_json = resp.json()
 
-            for single in resp_json:
-                brew_list.append(Brewery(single['id'], single['name'], single['brewery_type'],
-                                         single['address_1'], single['address_2'], single['address_3'],single['city'],
-                                         single['state_province'], single['postal_code'], single['country'], single['longitude'],
-                                         single['latitude'], single['phone'], single['website_url'], single['state'], single['street']))
-        return brew_list
-    #catch:
-    #Exception as e:
+        for single in resp_json:
+            brew_list.append(Brewery(single['id'], single['name'],
+                                     single['brewery_type'],
+                                     single['address_1'],
+                                     single['address_2'],
+                                     single['address_3'],
+                                     single['city'],
+                                     single['state_province'],
+                                     single['postal_code'],
+                                     single['country'],
+                                     single['longitude'],
+                                     single['latitude'],
+                                     single['phone'],
+                                     single['website_url'],
+                                     single['state'],
+                                     single['street']))
+    return brew_list
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--city', type=str)
     args = parser.parse_args()
-    
+
     list_of_breweries = listbreweries(args.city)
 
     for brewery in list_of_breweries:
         print(brewery)
-
