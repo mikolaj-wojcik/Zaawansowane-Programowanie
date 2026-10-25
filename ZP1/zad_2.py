@@ -1,6 +1,6 @@
 
 def mulitplicate_list_for(numbers):
-    ret_list =[]
+    ret_list = []
     for number in numbers:
         ret_list.append(number * 2)
 
@@ -8,7 +8,7 @@ def mulitplicate_list_for(numbers):
 
 
 def multiplicate_list_computed(numbers):
-    ret_list =[ number * 2 for number in numbers]
+    ret_list = [number * 2 for number in numbers]
 
     return ret_list
 

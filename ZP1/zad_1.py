@@ -4,6 +4,6 @@ def disp_name_list(names) -> None:
     pass
 
 
-names = ['Adam','Gabriel', 'Julia', 'Jan', 'Ewa']
+names = ['Adam', 'Gabriel', 'Julia', 'Jan', 'Ewa']
 
-#disp_name_list(names)
+disp_name_list(names)
