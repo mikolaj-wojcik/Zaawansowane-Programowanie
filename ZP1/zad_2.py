@@ -56,7 +56,7 @@ class Order:
     pass
 
     def __str__(self):
-        return f'Bibliotekarz: \n{self.employee}, \nStudent: \n{self.student}, \nData: {self.order_date}, \nKsiążki: {self.books}'
+        return f'Bibliotekarz: \n{self.employee}, \nStudent: \n{self.student}, \nData: {self.order_date}, \nKsiążki: { [str(book) for book in self.books]}'
     
 
 
@@ -84,6 +84,7 @@ order1 = Order(empl1, student1, [book2, book3, book4], datetime.date(2025,5,1))
 
 order2 = Order(empl2, student2, [book1, book3, book5], datetime.date(2025,5,1))
 
-print(book2)
+print(str([book2]))
 
+print(order1)
 print(order2)
