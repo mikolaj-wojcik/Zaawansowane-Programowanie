@@ -1,6 +1,5 @@
 import requests
 import argparse
-import copy
 
 BREWERY_API = 'https://api.openbrewerydb.org/v1/breweries'
 class Brewery:
