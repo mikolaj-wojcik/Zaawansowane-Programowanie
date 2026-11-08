@@ -18,7 +18,7 @@ def fibonacci(n: int) -> int:
         return b
 
 def count_vowels(text: str) -> int:
-    vowels = "aeiou"
+    vowels = "aeiouóąęy"
     return sum(1 for char in text.lower() if char in vowels)
 
 def calculate_discount(price: float, discount: float) -> float:
