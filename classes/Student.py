@@ -14,6 +14,9 @@ class Student:
     def marks(self, marks: int) -> None:
         self._marks = marks
 
+    def __str__(self):
+        return f'Imię: {self.name}'
+    
     def is_passed(self) -> None:
 
         return self.marks > 50
