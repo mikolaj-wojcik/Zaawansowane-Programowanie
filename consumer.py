@@ -1,9 +1,3 @@
-
-
-from time import sleep
-import os
-
-
 from time import sleep
 import sqlite3
 
