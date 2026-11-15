@@ -1,17 +1,14 @@
-
-
+import pika
 from time import sleep
-import sqlite3
 
 if __name__ == "__main__":
-    conn = sqlite3.connect("ZP.db")
-    c = conn.cursor()
-    c.execute('''
-            create table if not exists queue (id integer primary key,
-            status text)
-    ''')
+    params = pika.ConnectionParameters(host="localhost", port=8081)
+    connection = pika.BlockingConnection(params)
+    channel = connection.channel()
 
-    while (True):
-        sleep(1)
-        c.execute('''Insert into queue (status) values ('pending') ''')
-        conn.commit()
+    channel.queue_declare(queue="work", durable=True)
+    for i in range(200):
+        channel.basic_publish(exchange="", routing_key="work", body=b"pending")
+        sleep(10)
+
+    connection.close()
