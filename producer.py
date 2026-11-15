@@ -11,7 +11,7 @@ if __name__ == "__main__":
             status text)
     ''')
 
-    while(True):
+    while (True):
         sleep(1)
         c.execute('''Insert into queue (status) values ('pending') ''')
         conn.commit()
