@@ -6,9 +6,9 @@ if __name__ == "__main__":
     connection = pika.BlockingConnection(params)
     channel = connection.channel()
 
-    channel.queue_declare(queue="work", durable=True)
-    for i in range(200):
-        channel.basic_publish(exchange="", routing_key="work", body=b"pending")
-        sleep(10)
+    channel.queue_declare(queue="ZP", durable=True)
+    for i in range(500):
+        channel.basic_publish(exchange="", routing_key="ZP", body='pending ' + i.__str__())
+        sleep(1)
 
     connection.close()
